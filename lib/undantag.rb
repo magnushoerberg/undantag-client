@@ -12,11 +12,12 @@ module Undantag
     end
   end
   class Notifier
+    URL = "http://undantag.duh.se/exception"
     def self.notify exception
       unless Undantag::Configuration.api_key
         throw Undantag::ConfigurationError::NoApiKey
       end
-      uri = URI("http://www.example.com")
+      uri = URI(Notifier::URL)
       key = Undantag::Configuration.api_key
       Net::HTTP.post_form(uri, {exception: exception, api_key: key})
     end
