@@ -2,7 +2,7 @@ require 'rspec'
 require './lib/undantag'
 
 describe Undantag do
-  let api_key = 'super seceret api key'
+  let api_key = ENV['UNDANTAG_API_KEY']
   let github_user = 'octocat'
   let github_repo = 'testify'
 
