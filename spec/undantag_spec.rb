@@ -1,4 +1,6 @@
 require 'rspec'
+require 'vcr'
+require 'vcr_helper'
 require './lib/undantag'
 
 describe Undantag do
@@ -18,13 +20,17 @@ describe Undantag do
     Undantag.configure(github_repo: github_repo)
     Undantag::Configuration.github_repo.should == github_repo
   end
-  it 'makes a post to example.com when notify is called' do
-    Undantag.configure api_key: api_key
-    resp = Undantag::Notifier.notify(Exception.to_s)
+  it 'makes a post to the server when notify is called' do
+    VCR.use_cassette("undantag-server") do
+      Undantag.configure api_key: api_key
+      resp = Undantag::Notifier.notify(Exception.to_s)
+    end
   end
   it 'throws "Undantag::ConfigurationError::NoApiKey" if send is called' do
-    #temp hack
-    Undantag.configure api_key: nil
-    expect { Undantag::Notifier.notify(Exception.to_s) }.to raise_error
+    VCR.use_cassette("undantag-server") do
+      #temp hack
+      Undantag.configure api_key: nil
+      expect { Undantag::Notifier.notify(Exception.to_s) }.to raise_error
+    end
   end
 end
