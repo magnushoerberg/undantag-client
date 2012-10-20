@@ -3,12 +3,12 @@ require 'net/https'
 module Undantag
   class Notifier
     URL = "https://undantag.herokuapp.com/exception"
-    def self.notify request, exception
+    def self.notify env, exception, request
       config_vars = Undantag::Configuration.to_hash
       unless config_vars[:api_key]
         raise Undantag::ConfigurationError::NoApiKey
       end
-      post_params = config_vars.merge(env: ENV.inspect,
+      post_params = config_vars.merge(env: env.inspect,
                                       request: request.inspect,
                                       exception: exception.inspect)
 
