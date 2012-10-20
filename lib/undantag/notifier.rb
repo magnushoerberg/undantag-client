@@ -8,9 +8,9 @@ module Undantag
       unless config_vars[:api_key]
         raise Undantag::ConfigurationError::NoApiKey
       end
-      post_params = config_vars.merge(env: ENV,
-                                      request: request,
-                                      exception: exception)
+      post_params = config_vars.merge(env: ENV.inspect,
+                                      request: request.inspect,
+                                      exception: exception.inspect)
 
       uri = URI(Notifier::URL)
       http = Net::HTTP.new(uri.host, uri.port)
