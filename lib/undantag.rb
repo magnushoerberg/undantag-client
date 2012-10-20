@@ -9,6 +9,9 @@ module Undantag
   class Configuration
     class << self
       attr_accessor :api_key, :github_user, :github_repo
+      def to_hash
+        { api_key: api_key, github_user: github_user, github_repo: github_repo }
+      end
     end
   end
   class Notifier
@@ -19,7 +22,9 @@ module Undantag
       end
       uri = URI(Notifier::URL)
       key = Undantag::Configuration.api_key
-      Net::HTTP.post_form(uri, {exception: exception, api_key: key})
+      post_params = Undantag::Configuration.to_hash.merge(title: 'test',
+                                                          body: exception)
+      Net::HTTP.post_form(uri, post_params)
     end
   end
   def self.configure(params)
