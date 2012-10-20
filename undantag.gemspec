@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = Undantag::VERSION
   gem.authors       = ["Magnus Hörberg"]
   gem.email         = ["magnus.hoerberg@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Gem for the exception service UNDANTAG}
+  gem.summary       = %q{After configuration posts exceptions to https://undantag.herokuapp.com/exception}
+  gem.homepage      = "https://undantag.herokuapp.com"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
