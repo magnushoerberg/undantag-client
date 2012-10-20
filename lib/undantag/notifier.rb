@@ -1,4 +1,5 @@
 require 'net/https'
+require 'pp'
 
 module Undantag
   class Notifier
@@ -8,9 +9,10 @@ module Undantag
       unless config_vars[:api_key]
         raise Undantag::ConfigurationError::NoApiKey
       end
-      post_params = config_vars.merge(env: env.inspect,
-                                      request: request.inspect,
-                                      exception: exception.inspect)
+      post_params = config_vars.merge(env: PP.pp(env, ""),
+                                      request: PP.pp(request, ""),
+                                      backtrace: exception.backtrace.join("\n"),
+                                      exception: PP.pp(exception, ''))
 
       uri = URI(Notifier::URL)
       http = Net::HTTP.new(uri.host, uri.port)
