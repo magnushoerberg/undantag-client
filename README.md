@@ -18,7 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In your sinatra application add the following lines
+    
+    configure :production do
+      set :show_exceptions, false
+      Undantag.configure(api_key: ENV['UNDANTAG_API_KEY']
+                         github_user: ENV['GITHUB_USER']
+                         github_repo: ENV['GITHUB_REPO'])
+    end
+    error do
+      if ENV['RACK_ENV'] == 'production'
+        require 'undantag'
+        resp = Undantag::Notifier.notify(env,
+                                         env['sinatra.error'],
+                                         Rack::Request.new(env))
+      end
+    end
 
 ## Contributing
 
