@@ -26,6 +26,8 @@ module Undantag
       case response.code
       when "401"
         raise Undantag::NotAuthorized
+      when "500"
+        raise Undantag::SomethingWhentWrong
       end
     end
   end

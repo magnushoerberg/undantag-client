@@ -5,8 +5,8 @@ http_interactions:
     uri: https://undantag.herokuapp.com/exception
     body:
       encoding: US-ASCII
-      string: api_key=<Undantag API key>&github_user=<GitHub user>&github_repo=<GitHub
-        repo>&env=ENV&request=&exception=Exception
+      string: api_key=this+isn%27t+right&github_user=<GitHub user>&github_repo=<GitHub
+        repo>&env=%22env%22%0A&request=%22req%22%0A&backtrace=super+backtrace&exception=%23%3CException%3A+Exception%3E%0A
     headers:
       Accept:
       - ! '*/*'
@@ -16,20 +16,29 @@ http_interactions:
       - application/x-www-form-urlencoded
   response:
     status:
-      code: 500
-      message: Internal Server Error
+      code: 401
+      message: Unauthorized
     headers:
       Content-Type:
-      - text/plain
+      - text/html;charset=utf-8
       Server:
       - thin 1.5.0 codename Knife
+      Set-Cookie:
+      - rack.session=BAh7CEkiD3Nlc3Npb25faWQGOgZFRiJFZGE4Mzg0YzAzNWMyOTMwOTBiOWEx%0AN2MzZTQ4ZTczODdhODY5YmRkZTgwODUwYWQ1ODIwYWFkMjc4ZmU4ODllOEki%0ACWNzcmYGOwBGIkU0YWVjNzE0ZWFjNzc1ZGRhYjA0MzU0YTNjYTA1NmU5MWI3%0AMjAzMzY4NjM0ODJhMjNmMDhiNWQ1YWRlMjVhZWIxSSINdHJhY2tpbmcGOwBG%0AewhJIhRIVFRQX1VTRVJfQUdFTlQGOwBGIi1iMjE3ZTk4YzNiZjcwZjNjZjQ2%0AMzNhNTQ0N2Q2NTg3ZWVhOTc0YmExSSIZSFRUUF9BQ0NFUFRfRU5DT0RJTkcG%0AOwBGIi1kYTM5YTNlZTVlNmI0YjBkMzI1NWJmZWY5NTYwMTg5MGFmZDgwNzA5%0ASSIZSFRUUF9BQ0NFUFRfTEFOR1VBR0UGOwBGIi1kYTM5YTNlZTVlNmI0YjBk%0AMzI1NWJmZWY5NTYwMTg5MGFmZDgwNzA5%0A--3c7936c14f9d9958a3e09d1fb3c938a2b15ea1ec;
+        path=/; HttpOnly; secure
+      - rack.session=BAh7CEkiD3Nlc3Npb25faWQGOgZFRiJFZGE4Mzg0YzAzNWMyOTMwOTBiOWEx%0AN2MzZTQ4ZTczODdhODY5YmRkZTgwODUwYWQ1ODIwYWFkMjc4ZmU4ODllOEki%0ACWNzcmYGOwBGIkU0YWVjNzE0ZWFjNzc1ZGRhYjA0MzU0YTNjYTA1NmU5MWI3%0AMjAzMzY4NjM0ODJhMjNmMDhiNWQ1YWRlMjVhZWIxSSINdHJhY2tpbmcGOwBG%0AewhJIhRIVFRQX1VTRVJfQUdFTlQGOwBGIi1iMjE3ZTk4YzNiZjcwZjNjZjQ2%0AMzNhNTQ0N2Q2NTg3ZWVhOTc0YmExSSIZSFRUUF9BQ0NFUFRfRU5DT0RJTkcG%0AOwBGIi1kYTM5YTNlZTVlNmI0YjBkMzI1NWJmZWY5NTYwMTg5MGFmZDgwNzA5%0ASSIZSFRUUF9BQ0NFUFRfTEFOR1VBR0UGOwBGIi1kYTM5YTNlZTVlNmI0YjBk%0AMzI1NWJmZWY5NTYwMTg5MGFmZDgwNzA5%0A--da5ec0f396e8921f2ffb40b3d913ad0a8b08b169;
+        path=/; HttpOnly; secure
+      X-Frame-Options:
+      - sameorigin
+      X-Xss-Protection:
+      - 1; mode=block
       Content-Length:
-      - '21'
+      - '0'
       Connection:
       - keep-alive
     body:
       encoding: US-ASCII
-      string: Internal server error
+      string: ''
     http_version: 
-  recorded_at: Sat, 20 Oct 2012 15:55:06 GMT
+  recorded_at: Sun, 21 Oct 2012 10:30:09 GMT
 recorded_with: VCR 2.2.5
